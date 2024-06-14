@@ -2,12 +2,30 @@ import { motion } from "framer-motion"
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 import { FormField } from "../../components"
+import { createAccount, loginUser } from "../../store/userslice"
+import { useDispatch, useSelector } from "react-redux"
 
 const Register = () => {
   const { register, handleSubmit } = useForm()
+  const dispatch = useDispatch()
 
-  const submit = (data) => {
-    console.log(data)
+  const submit = async (data) => {
+    const response = await dispatch(createAccount(data))
+
+    if (response.type === "register/fulfilled") {
+      const email = response.payload?.data.email
+      const password = response.payload?.data.password
+
+      const loginResult = await dispatch(loginUser({ email, password }))
+
+      if (loginResult?.type === "login/fulfilled") {
+        navigate("/");
+      } else {
+        navigate("/login");
+      }
+    }
+
+    console.log(response)
   }
 
   return (
