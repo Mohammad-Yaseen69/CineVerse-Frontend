@@ -6,6 +6,12 @@ import { getUser } from "./store/userslice"
 import { useEffect } from "react"
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUser())
+    
+  }, [])
  
   return (
     <div className="w-full min-h-screen bg-zinc-900">

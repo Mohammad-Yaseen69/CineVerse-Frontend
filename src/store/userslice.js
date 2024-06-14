@@ -6,6 +6,7 @@ import toast from "react-hot-toast"
 
 const API = axios.create({
     baseURL: `${BASE_URL}/api/v1/`,
+    withCredentials: true
 })
 
 const initialState = {
@@ -15,20 +16,35 @@ const initialState = {
 }
 
 export const createAccount = createAsyncThunk("register", async (data) => {
+    console.log(data)
     try {
+        toast.loading("Creating Account..." , {id : "auth"})
         const response = await API.post("users", data)
         console.log(response.data)
-        toast.success(response.data?.message)
+        toast.success(response.data?.message , {id : "auth"})
         return response.data
     } catch (error) {
-        toast.error(error.response?.data?.message || "Something went wrong")
+        toast.error(error.response?.data?.message || "Something went wrong" , {id : "auth"})
         throw error.response?.data?.message
     }
 })
 
 export const loginUser = createAsyncThunk("login", async (data) => {
     try {
+        toast.loading("Loading..." , {id : "auth"})
         const response = await API.post("users/login", data)
+        console.log(response.data)
+        toast.success(response.data?.message, {id : "auth"})
+        return response.data
+    } catch (error) {
+        toast.error(error.response?.data?.message || "Something went wrong" , {id : "auth"})
+        throw error.response?.data?.message
+    }
+})
+
+export const logoutUser = createAsyncThunk("logout", async () => {
+    try {
+        const response = await API.post("users/logout")
         console.log(response.data)
         toast.success(response.data?.message)
         return response.data
@@ -39,7 +55,6 @@ export const loginUser = createAsyncThunk("login", async (data) => {
 })
 
 export const getUser = createAsyncThunk("getUser", async () => {
-    console.log("no error")
     try {
         const response = await API.get("users")
         console.log(response.data)
@@ -62,7 +77,7 @@ const userSlice = createSlice({
             .addCase(createAccount.fulfilled, (state, action) => {
                 state.loading = false
                 state.user = action.payload?.data
-                state.isLoggedIn = true
+                state.isLoggedIn = false
             })
             .addCase(createAccount.rejected, (state) => {
                 state.loading = false
@@ -91,6 +106,19 @@ const userSlice = createSlice({
                 state.isLoggedIn = true
             })
             .addCase(getUser.rejected, (state) => {
+                state.loading = false
+                state.isLoggedIn = false
+                state.user = null
+            })
+            .addCase(logoutUser.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(logoutUser.fulfilled, (state, action) => {
+                state.loading = false
+                state.user = null
+                state.isLoggedIn = false
+            })
+            .addCase(logoutUser.rejected, (state) => {
                 state.loading = false
                 state.isLoggedIn = false
                 state.user = null

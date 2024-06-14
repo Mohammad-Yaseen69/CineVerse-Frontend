@@ -1,31 +1,37 @@
+import { useNavigate } from 'react-router-dom'
 import { motion } from "framer-motion"
-import { useForm } from "react-hook-form"
+import { set, useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 import { FormField } from "../../components"
 import { createAccount, loginUser } from "../../store/userslice"
 import { useDispatch, useSelector } from "react-redux"
+import { useState } from 'react'
 
 const Register = () => {
   const { register, handleSubmit } = useForm()
+  const [submiting, setSubmiting] = useState(false)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const submit = async (data) => {
-    const response = await dispatch(createAccount(data))
+    setSubmiting(true)
+    if(data){
 
-    if (response.type === "register/fulfilled") {
-      const email = response.payload?.data.email
-      const password = response.payload?.data.password
-
-      const loginResult = await dispatch(loginUser({ email, password }))
-
-      if (loginResult?.type === "login/fulfilled") {
-        navigate("/");
-      } else {
-        navigate("/login");
+      const response = await dispatch(createAccount(data))
+  
+      if (response.type === "register/fulfilled") {
+        const res = await dispatch(loginUser({ email: data.email, password: data.password }))
+        if (res.type === "login/fulfilled"){
+          navigate("/");
+        }
+        else{
+          navigate("/login");
+        }
       }
-    }
 
-    console.log(response)
+
+      setSubmiting(false)
+    }
   }
 
   return (
@@ -50,7 +56,7 @@ const Register = () => {
               duration: 0.2,
               ease: "easeOut"
             }}
-            type="submit" className="bg-blue-600 px-7 py-3  text-white font-semibold self-center rounded-full cursor-pointer" value="Register" />
+            type="submit" disabled={submiting} className="bg-blue-600 px-7 py-3  text-white font-semibold self-center rounded-full cursor-pointer" value="Register" />
         </form>
       </div>
     </div>

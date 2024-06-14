@@ -11,6 +11,8 @@ const Login = () => {
 
   const submit = async (data) => {
     const response = await dispatch(loginUser(data))
+
+    console.log(response.type)
     if (response.type === "login/fulfilled") {
       navigate("/")
     }
