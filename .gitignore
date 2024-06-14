@@ -25,4 +25,5 @@ dist-ssr
 
 vite.config.js
 .eslintrc.cjs
+.env
 postcss.config.js
