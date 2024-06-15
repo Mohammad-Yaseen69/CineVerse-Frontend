@@ -13,15 +13,14 @@ const initialState = {
     user: null,
     isLoggedIn: false,
     loading: true,
-    expiresIn : null
+    expiresIn : null,
+    userEmailForgotPassword : null
 }
 
 export const createAccount = createAsyncThunk("register", async (data) => {
-    console.log(data)
     try {
         toast.loading("Creating Account..." , {id : "auth"})
         const response = await API.post("users", data)
-        console.log(response.data)
         toast.success(response.data?.message , {id : "auth"})
         return response.data
     } catch (error) {
@@ -33,7 +32,6 @@ export const createAccount = createAsyncThunk("register", async (data) => {
 export const loginUser = createAsyncThunk("login", async (data) => {
     try {
         const response = await API.post("users/login", data)
-        console.log(response.data)
         toast.success(response.data?.message, {id : "auth2"})
         return response.data
     } catch (error) {
@@ -45,7 +43,6 @@ export const loginUser = createAsyncThunk("login", async (data) => {
 export const logoutUser = createAsyncThunk("logout", async () => {
     try {
         const response = await API.post("users/logout")
-        console.log(response.data)
         toast.success(response.data?.message)
         return response.data
     } catch (error) {
@@ -73,6 +70,42 @@ export const refreshAccessToken = createAsyncThunk("refreshAccessToken", async (
     } catch (error) {
         toast.error(error.response?.data?.message || "Something went wrong")
         throw error.response?.data?.message
+    }
+})
+
+export const forgotPassword = createAsyncThunk("forgotPassword", async (data) => {
+    try {
+        const response = await API.post("users/forgot-password", data)
+        console.log(response.data)
+        toast.success(response.data?.message)
+        return response.data
+    } catch (error) {
+        toast.error(error.response?.data?.message || "Something went wrong")
+        throw error.response?.data?.message
+    }
+})
+
+export const verifyOtp = createAsyncThunk("verifyOtp" , async (data) => {
+    try {
+        const response = await API.post("users/verify-otp" , data)
+        console.log(response.data)
+        toast.success(response.data?.message)
+        return response.data
+    } catch (error) {
+        toast.error(error.response?.data?.message || "Something went wrong")
+        console.log(error.response?.data?.message)
+    }
+})
+
+export const resetPassword = createAsyncThunk("resetPassword" , async (data) => {
+    try {
+        const response = await API.put("users/reset-password", data)
+        console.log(response.data)
+        toast.success(response.data?.message)
+        return response.data
+    } catch (error) {
+        toast.error(error.response?.data?.message || "Something went wrong")
+        console.log(error.response?.data?.message)
     }
 })
 
@@ -143,11 +176,39 @@ const userSlice = createSlice({
                 state.user = action.payload?.data
                 state.isLoggedIn = true
             })
-            .addCase(refreshAccessToken.rejected), (state) => {
+            .addCase(refreshAccessToken.rejected, (state) => {
                 state.loading = false
                 state.isLoggedIn = false
                 state.user = null
-            }
+            })
+            .addCase(forgotPassword.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(forgotPassword.fulfilled, (state, action) => {
+                state.loading = false
+                state.userEmailForgotPassword = action.payload?.data?.email
+            })
+            .addCase(forgotPassword.rejected, (state) => {
+                state.loading = false
+            })
+            .addCase(verifyOtp.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(verifyOtp.fulfilled, (state, action) => {
+                state.loading = false
+            })
+            .addCase(verifyOtp.rejected, (state) => {
+                state.loading = false
+            })
+            .addCase(resetPassword.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(resetPassword.fulfilled, (state, action) => {
+                state.loading = false
+            })
+            .addCase(resetPassword.rejected, (state) => {
+                state.loading = false
+            })
     }
 })
 
