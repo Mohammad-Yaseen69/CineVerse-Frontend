@@ -14,7 +14,8 @@ const initialState = {
     isLoggedIn: false,
     loading: true,
     expiresIn: null,
-    userEmailForgotPassword: null
+    userEmailForgotPassword: null,
+    isVerified : false
 }
 
 export const createAccount = createAsyncThunk("register", async (data) => {
@@ -104,6 +105,19 @@ export const verifyOtp = createAsyncThunk("verifyOtp", async (data) => {
 export const resetPassword = createAsyncThunk("resetPassword", async (data) => {
     try {
         const response = await API.put("users/reset-password", data)
+        console.log(response.data)
+        toast.success(response.data?.message)
+        return response.data
+    } catch (error) {
+        toast.error(error.response?.data?.message || "Something went wrong")
+        console.log(error.response?.data?.message)
+    }
+})
+
+export const verification = createAsyncThunk("verification", async ({userId, token}) => {
+    try {
+        
+        const response = await API.get(`users/${userId}/verify/${token}`)
         console.log(response.data)
         toast.success(response.data?.message)
         return response.data
@@ -212,6 +226,17 @@ const userSlice = createSlice({
             })
             .addCase(resetPassword.rejected, (state) => {
                 state.loading = false
+            })
+            .addCase(verification.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(verification.fulfilled, (state, action) => {
+                state.loading = false
+                state.isVerified = true
+            })
+            .addCase(verification.rejected, (state) => {
+                state.loading = false
+                state.isVerified = false
             })
     }
 })
