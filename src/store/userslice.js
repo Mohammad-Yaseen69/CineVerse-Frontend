@@ -12,7 +12,8 @@ const API = axios.create({
 const initialState = {
     user: null,
     isLoggedIn: false,
-    loading: true
+    loading: true,
+    expiresIn : null
 }
 
 export const createAccount = createAsyncThunk("register", async (data) => {
@@ -31,13 +32,12 @@ export const createAccount = createAsyncThunk("register", async (data) => {
 
 export const loginUser = createAsyncThunk("login", async (data) => {
     try {
-        toast.loading("Loading..." , {id : "auth"})
         const response = await API.post("users/login", data)
         console.log(response.data)
-        toast.success(response.data?.message, {id : "auth"})
+        toast.success(response.data?.message, {id : "auth2"})
         return response.data
     } catch (error) {
-        toast.error(error.response?.data?.message || "Something went wrong" , {id : "auth"})
+        toast.error(error.response?.data?.message || "Something went wrong" , {id : "auth2"})
         throw error.response?.data?.message
     }
 })
@@ -57,6 +57,17 @@ export const logoutUser = createAsyncThunk("logout", async () => {
 export const getUser = createAsyncThunk("getUser", async () => {
     try {
         const response = await API.get("users")
+        console.log(response.data)
+        return response.data
+    } catch (error) {
+        toast.error(error.response?.data?.message || "Something went wrong")
+        throw error.response?.data?.message
+    }
+})
+
+export const refreshAccessToken = createAsyncThunk("refreshAccessToken", async () => {
+    try {
+        const response = await API.post("users//refresh-token")
         console.log(response.data)
         return response.data
     } catch (error) {
@@ -102,7 +113,8 @@ const userSlice = createSlice({
             })
             .addCase(getUser.fulfilled, (state, action) => {
                 state.loading = false
-                state.user = action.payload?.data
+                state.user = action.payload?.data?.user
+                state.expiresIn = action.payload?.data?.expiresIn
                 state.isLoggedIn = true
             })
             .addCase(getUser.rejected, (state) => {
@@ -123,6 +135,19 @@ const userSlice = createSlice({
                 state.isLoggedIn = false
                 state.user = null
             })
+            .addCase(refreshAccessToken.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(refreshAccessToken.fulfilled, (state, action) => {
+                state.loading = false
+                state.user = action.payload?.data
+                state.isLoggedIn = true
+            })
+            .addCase(refreshAccessToken.rejected), (state) => {
+                state.loading = false
+                state.isLoggedIn = false
+                state.user = null
+            }
     }
 })
 
