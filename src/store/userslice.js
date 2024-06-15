@@ -13,18 +13,18 @@ const initialState = {
     user: null,
     isLoggedIn: false,
     loading: true,
-    expiresIn : null,
-    userEmailForgotPassword : null
+    expiresIn: null,
+    userEmailForgotPassword: null
 }
 
 export const createAccount = createAsyncThunk("register", async (data) => {
     try {
-        toast.loading("Creating Account..." , {id : "auth"})
+        toast.loading("Creating Account...", { id: "auth" })
         const response = await API.post("users", data)
-        toast.success(response.data?.message , {id : "auth"})
+        toast.success(response.data?.message, { id: "auth" })
         return response.data
     } catch (error) {
-        toast.error(error.response?.data?.message || "Something went wrong" , {id : "auth"})
+        toast.error(error.response?.data?.message || "Something went wrong", { id: "auth" })
         throw error.response?.data?.message
     }
 })
@@ -32,10 +32,10 @@ export const createAccount = createAsyncThunk("register", async (data) => {
 export const loginUser = createAsyncThunk("login", async (data) => {
     try {
         const response = await API.post("users/login", data)
-        toast.success(response.data?.message, {id : "auth2"})
+        toast.success(response.data?.message, { id: "auth2" })
         return response.data
     } catch (error) {
-        toast.error(error.response?.data?.message || "Something went wrong" , {id : "auth2"})
+        toast.error(error.response?.data?.message || "Something went wrong", { id: "auth2" })
         throw error.response?.data?.message
     }
 })
@@ -57,8 +57,12 @@ export const getUser = createAsyncThunk("getUser", async () => {
         console.log(response.data)
         return response.data
     } catch (error) {
-        toast.error(error.response?.data?.message || "Something went wrong")
-        throw error.response?.data?.message
+        const message =
+            error.response?.data?.message.includes("Operation")
+                || error.response?.data?.message.includes("ECONNRESET") ? "Server Error" : error.response?.data?.message
+
+        toast.error(message|| "Something went wrong")
+        throw message
     }
 })
 
@@ -85,9 +89,9 @@ export const forgotPassword = createAsyncThunk("forgotPassword", async (data) =>
     }
 })
 
-export const verifyOtp = createAsyncThunk("verifyOtp" , async (data) => {
+export const verifyOtp = createAsyncThunk("verifyOtp", async (data) => {
     try {
-        const response = await API.post("users/verify-otp" , data)
+        const response = await API.post("users/verify-otp", data)
         console.log(response.data)
         toast.success(response.data?.message)
         return response.data
@@ -97,7 +101,7 @@ export const verifyOtp = createAsyncThunk("verifyOtp" , async (data) => {
     }
 })
 
-export const resetPassword = createAsyncThunk("resetPassword" , async (data) => {
+export const resetPassword = createAsyncThunk("resetPassword", async (data) => {
     try {
         const response = await API.put("users/reset-password", data)
         console.log(response.data)

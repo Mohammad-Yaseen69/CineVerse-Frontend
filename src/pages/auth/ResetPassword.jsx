@@ -27,8 +27,8 @@ const ResetPassword = () => {
   return (
     <div className='w-full h-[80vh] flex'>
       <div className="w-full h-full flex flex-col justify-center items-center">
-        <h1 className="font-monstserrat text-white font-extrabold text-5xl mb-10">Reset your password</h1>
-        <form onSubmit={handleSubmit(submit)} action="" className="flex flex-col w-[50%] gap-3 items-start mx-auto p-6">
+        <h1 className="font-monstserrat text-white font-extrabold text-xl xs:text-4xl md:text-5xl mb-5 xs:mb-10">Reset your password</h1>
+        <form onSubmit={handleSubmit(submit)} action="" className="flex flex-col w-full sm:w-[50%] gap-3 items-start mx-auto p-6">
           <FormField id="newPassword" registerFunction={register} type="password" name="newPassword" placeholder="Enter Your New password" />
           <motion.input
             whileHover={{

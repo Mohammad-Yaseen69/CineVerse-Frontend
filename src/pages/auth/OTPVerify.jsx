@@ -22,8 +22,8 @@ const OTPVerify = () => {
   return (
     <div className='w-full h-[80vh] flex'>
       <div className="w-full h-full flex flex-col justify-center items-center">
-        <h1 className="font-monstserrat text-white font-extrabold text-5xl mb-10">Verify Your Otp</h1>
-        <form onSubmit={handleSubmit(submit)} action="" className="flex flex-col w-[50%] gap-3 items-start mx-auto p-6">
+        <h1 className="font-monstserrat text-white font-extrabold text-xl mb-3 xs:text-5xl xs:mb-10">Verify Your Otp</h1>
+        <form onSubmit={handleSubmit(submit)} action="" className="flex flex-col w-[80%] xs:w-[50%] gap-3 items-start mx-auto p-6">
           <FormField id="otp" registerFunction={register} type="number" name="otp" placeholder="Enter Your OTP" />
           <motion.input
             whileHover={{
