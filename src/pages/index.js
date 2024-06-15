@@ -3,3 +3,6 @@ export {default as Register } from "./auth/Register"
 export {default as Home } from "./Home"
 export {default as Chat} from "./Chat"
 export {default as NotFound} from './NotFound'
+export {default as OTPVerify} from './auth/OTPVerify'
+export {default as ForgotPassword} from './auth/ForgotPassword'
+export {default as ResetPassword} from './auth/ResetPassword'

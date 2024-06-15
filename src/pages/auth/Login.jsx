@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { FormField } from "../../components"
 import { loginUser } from "../../store/userslice"
 import { useDispatch } from "react-redux"
@@ -8,11 +8,11 @@ import { useDispatch } from "react-redux"
 const Login = () => {
   const { register, handleSubmit } = useForm()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const submit = async (data) => {
     const response = await dispatch(loginUser(data))
-
-    console.log(response.type)
+    
     if (response.type === "login/fulfilled") {
       navigate("/")
     }
@@ -28,7 +28,7 @@ const Login = () => {
 
           <FormField id="password" registerFunction={register} type="password" name="Password" placeholder="Enter Your Password" />
 
-          <p className="mt-3 text-white font-bold cursor-pointer ml-3">Forgot Password?</p>
+          <p onClick={() => navigate("/forgot-password")} className="mt-3 text-white font-bold cursor-pointer ml-3">Forgot Password?</p>
           <motion.input
             whileHover={{
               scale: 1.05
