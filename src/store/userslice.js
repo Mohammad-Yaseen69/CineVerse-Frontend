@@ -58,11 +58,13 @@ export const getUser = createAsyncThunk("getUser", async () => {
         console.log(response.data)
         return response.data
     } catch (error) {
-        const message =
+        let message =
             error.response?.data?.message.includes("Operation")
                 || error.response?.data?.message.includes("ECONNRESET") ? "Server Error" : error.response?.data?.message
 
-        toast.error(message|| "Something went wrong")
+        message = error.response?.data?.message.includes("Unauthorized request") ? "Please Login" : error.response?.data?.message
+
+        toast.error(message || "Something went wrong")
         throw message
     }
 })
@@ -114,9 +116,9 @@ export const resetPassword = createAsyncThunk("resetPassword", async (data) => {
     }
 })
 
-export const verification = createAsyncThunk("verification", async ({userId, token}) => {
+export const verification = createAsyncThunk("verification", async ({ userId, token }) => {
     try {
-        
+
         const response = await API.get(`users/${userId}/verify/${token}`)
         console.log(response.data)
         toast.success(response.data?.message)

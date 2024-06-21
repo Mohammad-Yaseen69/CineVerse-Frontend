@@ -39,7 +39,7 @@ const Register = () => {
       <div className="w-full h-full flex flex-col justify-center items-center">
         <h1 className="font-monstserrat text-white font-extrabold  text-3xl md-5 xs:text-5xl xs:mb-10">Create Account</h1>
         <form onSubmit={handleSubmit(submit)} action="" className="flex w-full  flex-col md:w-[60%] gap-3 items-start mx-auto p-6">
-          <FormField id="name" registerFunction={register} type="text" name="Name" placeholder="Enter Your Name" />
+          <FormField id="userName" registerFunction={register} type="text" name="userName" placeholder="Enter Your User Name" />
 
           <FormField id="email" registerFunction={register} type="email" name="Email" placeholder="Enter Your Email" />
 
