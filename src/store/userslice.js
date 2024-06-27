@@ -4,7 +4,7 @@ import { BASE_URL } from "../constant"
 import toast from "react-hot-toast"
 
 
-const API = axios.create({
+export const API = axios.create({
     baseURL: `${BASE_URL}/api/v1/`,
     withCredentials: true
 })
@@ -71,7 +71,7 @@ export const getUser = createAsyncThunk("getUser", async () => {
 
 export const refreshAccessToken = createAsyncThunk("refreshAccessToken", async () => {
     try {
-        const response = await API.post("users//refresh-token")
+        const response = await API.post("users/refresh-token")
         console.log(response.data)
         return response.data
     } catch (error) {

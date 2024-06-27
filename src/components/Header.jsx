@@ -3,6 +3,10 @@ import { Link } from "react-router-dom"
 import Logo from "../assets/logo.png"
 import { logoutUser } from "../store/userslice"
 import { useNavigate } from "react-router-dom"
+import { Img } from "./"
+import { MdMovie } from 'react-icons/md';
+
+
 
 
 const btnClass = `w-[130px] max-sm:w-[80px] bg-black h-[45px] my-3 flex items-center justify-center rounded-xl cursor-pointer relative overflow-hidden transition-all duration-500 ease-in-out shadow-md hover:scale-105 hover:shadow-lg before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#009b49] before:to-[rgb(105,184,141)] before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-xl hover:before:left-0 text-[#fff]`
@@ -20,22 +24,19 @@ const Header = () => {
   return (
     <div className="w-full  py-8 px-3 xs:px-5">
       <div className="flex justify-between">
-        <div className="flex items-center max-xs:hidden  justify-center gap-1">
-          <img
-            src={Logo}
-            alt="gpt-logo"
-            className="size-14 rounded-xl"
-          />
-          <h1 className="text-white font-bold text-lg font-roboto"><span className="text-xl font-monstserrat">MERN</span>-GPT</h1>
+        <div className="flex flex-col justify-center items-center ">
+            <MdMovie size={50} color="white" />
+            <p className="font-monstserrat text-white font-semibold">CineVerse</p>
         </div>
+
 
         <div className="flex items-center max-xs:justify-between max-xs:w-full justify-center">
           {user.loading ? <div className="loader"></div> :
-          <>
-          <Link to="/">
-            <button className="xs:px-4 px-2 text-gray-100 font-bold text-xl xs:py-2 rounded-md">Home</button>
-          </Link>
-          { user.isLoggedIn ? (
+            <>
+              <Link to="/">
+                <button className="xs:px-4 px-2 text-gray-100 font-bold text-xl xs:py-2 rounded-md">Home</button>
+              </Link>
+              {user.isLoggedIn ? (
                 <button onClick={handleLogout} className="Btn flex items-center space-x-2">
                   <div className="sign">
                     <svg viewBox="0 0 512 512" className="h-6 w-6">
@@ -55,7 +56,7 @@ const Header = () => {
                   </Link>
                 </div>
               )}
-          </>}
+            </>}
 
 
         </div>
