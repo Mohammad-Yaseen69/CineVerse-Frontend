@@ -10,19 +10,20 @@ const initialState = {
 }
 
 
-export const addGenre = createAsyncThunk("genre/add",async (data) => {
+export const addGenre = createAsyncThunk("genre/add", async (data) => {
+    console.log(data)
     try {
         toast.loading("Adding Genre", { id: "genre" })
         const response = await API.post("genres", data)
         toast.success("Genre Added", { id: "genre" })
         return response.data
     } catch (error) {
-        toast.error(error.response?.data?.message)
+        toast.error(error.response?.data?.message, { id: "genre" })
         throw error.response?.data?.message
     }
 })
 
-export const deleteGenre = createAsyncThunk("genre/delete",async ({ id }) => {
+export const deleteGenre = createAsyncThunk("genre/delete", async ({ id }) => {
     try {
         toast.loading("Deleting Genre", { id: "genre" })
         const response = await API.delete(`genres/${id}`)
@@ -30,16 +31,14 @@ export const deleteGenre = createAsyncThunk("genre/delete",async ({ id }) => {
         console.log(response.data)
         return { id }
     } catch (error) {
-        toast.error(error.response?.data?.message)
+        toast.error(error.response?.data?.message, { id: "genre" })
         throw error.response?.data?.message
     }
 })
 
-export const getAllGenre = createAsyncThunk("genre/getAll",async () => {
+export const getAllGenre = createAsyncThunk("genre/getAll", async () => {
     try {
-        toast.loading("Loading Genres", { id: "genre" })
         const response = await API.get("genres")
-        toast.success("Genres Loaded", { id: "genre" })
         return response.data
     } catch (error) {
         toast.error(error.response?.data?.message)
@@ -56,7 +55,10 @@ const genreSlice = createSlice({
             state.loading = true
         })
         builder.addCase(addGenre.fulfilled, (state, action) => {
-            state.genres.push(action.payload?.data)
+            state.genres.push({
+                name: action.payload?.data?.name,
+                _id: action.payload?.data?._id
+            })
             state.loading = false
         })
         builder.addCase(addGenre.rejected, (state, action) => {

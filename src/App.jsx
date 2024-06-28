@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast"
 import { Header } from './components'
 import { useDispatch, useSelector } from "react-redux"
 import { getUser, refreshAccessToken } from "./store/userslice"
+import {getAllGenre} from './store/genreSlice'
 import { useEffect } from "react"
 
 
@@ -14,6 +15,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getUser())
+    dispatch(getAllGenre())
   }, [])
 
   useEffect(() => {
@@ -27,7 +29,7 @@ function App() {
   }, [isLoggedIn, expiresIn])
 
   return (
-    <div className="w-full min-h-screen bg-zinc-900">
+    <div className="w-full min-h-screen ">
       <Header />
       <Outlet />
       <Toaster position="top-right" />
