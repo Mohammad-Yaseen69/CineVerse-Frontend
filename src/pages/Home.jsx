@@ -1,8 +1,53 @@
-import React from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { getAllMedia } from "../store/mediaSlice"
+import { useEffect, useState } from "react"
+import { Img } from "../components"
+import axios from "axios"
+import { SearchBox } from "../components"
 
 const Home = () => {
+  const dispatch = useDispatch()
+  const [medias, setMedias] = useState([])
+
+  // Here We are using Movie Db api for better quality images
+  const [randomImgPath, setPath] = useState("")
+
+  useEffect(() => {
+    const fetchMedia = async () => {
+      const medias = await dispatch(getAllMedia());
+      setMedias(medias?.payload?.data)
+    };
+
+    const movieImgPath = async () => {
+      const response = await axios.get(`${import.meta.env.VITE_MOVIEDB_BASE_URL}trending/all/week?api_key=${import.meta.env.VITE_MOVIEDB_API}`)
+
+
+      let randomIndex = Math.floor(Math.random() * response?.data?.results?.length);
+
+      setPath("http://image.tmdb.org/t/p/original" + response?.data?.results[randomIndex]?.backdrop_path)
+    }
+
+    movieImgPath();
+    fetchMedia();
+  }, [])
+
+
+
   return (
-    <div>Home</div>
+    <div className=" w-full min-h-screen">
+      <div className="backdrop-img">
+        <Img src={randomImgPath} />
+      </div>
+
+
+      <div className="flex w-full h-screen flex-col justify-center items-center">
+        <h1 className="text-white font-extrabold text-7xl font-monstserrat">The Cine Verse</h1>
+        <p className="mt-4 mb-10 text-gray-200 font-bold text-md">Explore Cinematic Worlds: Movies, Series, and Anime at Your Fingertips</p>
+        <SearchBox />
+      </div>
+      <div className="opacity-layer"></div>
+    </div>
+
   )
 }
 

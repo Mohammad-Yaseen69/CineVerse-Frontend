@@ -22,7 +22,7 @@ const Header = () => {
   }
 
   return (
-    <div className="w-full py-8 px-3 xs:px-5">
+    <div className="w-full py-4 bg-black bg-opacity-25 backdrop-blur-sm px-3 xs:px-5">
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <Link to={"/"} className="flex items-center space-x-2">

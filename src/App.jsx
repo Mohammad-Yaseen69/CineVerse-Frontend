@@ -29,7 +29,7 @@ function App() {
   }, [isLoggedIn, expiresIn])
 
   return (
-    <div className="w-full min-h-screen ">
+    <div className="w-full relative min-h-screen ">
       <Header />
       <Outlet />
       <Toaster position="top-right" />
