@@ -22,20 +22,20 @@ const Header = () => {
   }
 
   return (
-    <div className="w-full  py-8 px-3 xs:px-5">
-      <div className="flex justify-between">
-        <div className="flex flex-col justify-center items-center ">
+    <div className="w-full py-8 px-3 xs:px-5">
+      <div className="flex justify-between items-center">
+        <div className="flex items-center">
+          <Link to={"/"} className="flex items-center space-x-2">
             <MdMovie size={50} color="white" />
-            <p className="font-monstserrat text-white font-semibold">CineVerse</p>
+            <p className="font-montserrat text-white font-semibold">CineVerse</p>
+          </Link>
         </div>
 
-
-        <div className="flex items-center max-xs:justify-between max-xs:w-full justify-center">
-          {user.loading ? <div className="loader"></div> :
+        <div className="flex items-center">
+          {user.loading ? (
+            <div className="loader"></div>
+          ) : (
             <>
-              <Link to="/">
-                <button className="xs:px-4 px-2 text-gray-100 font-bold text-xl xs:py-2 rounded-md">Home</button>
-              </Link>
               {user.isLoggedIn ? (
                 <button onClick={handleLogout} className="Btn flex items-center space-x-2">
                   <div className="sign">
@@ -50,15 +50,13 @@ const Header = () => {
                   <Link to="/login">
                     <button className={btnClass}>Login</button>
                   </Link>
-
                   <Link to="register">
                     <button className={btnClass}>Register</button>
                   </Link>
                 </div>
               )}
-            </>}
-
-
+            </>
+          )}
         </div>
       </div>
     </div>

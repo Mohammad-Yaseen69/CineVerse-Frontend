@@ -2,6 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* Custom Scrollbar for WebKit Browsers */
+::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #2a2a2a; /* Background of the scrollbar track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+  border: 2px solid #2a2a2a; /* Space around the thumb to match the track */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color when hovering over the scrollbar thumb */
+}
+
+/* Custom Scrollbar for Firefox */
+html {
+  scrollbar-width: thin; /* Make the scrollbar thinner */
+  scrollbar-color: #888 #2a2a2a; /* Color of the scrollbar thumb and track */
+}
+
+/* For Internet Explorer and Edge */
+body {
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Automatically hides scrollbar when not in use */
+}
+
+/* Scrollbar for horizontal scrolling */
+::-webkit-scrollbar-horizontal {
+  height: 12px; /* Height of the horizontal scrollbar */
+}
+
+
 .Btn {
     display: flex;
     align-items: center;

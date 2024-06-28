@@ -15,7 +15,7 @@ const initialState = {
     loading: true,
     expiresIn: null,
     userEmailForgotPassword: null,
-    isVerified : false
+    isVerified: false
 }
 
 export const createAccount = createAsyncThunk("register", async (data) => {
@@ -55,16 +55,8 @@ export const logoutUser = createAsyncThunk("logout", async () => {
 export const getUser = createAsyncThunk("getUser", async () => {
     try {
         const response = await API.get("users")
-        console.log(response.data)
         return response.data
     } catch (error) {
-        let message =
-            error.response?.data?.message.includes("Operation")
-                || error.response?.data?.message.includes("ECONNRESET") ? "Server Error" : error.response?.data?.message
-
-        message = error.response?.data?.message.includes("Unauthorized request") ? "Please Login" : error.response?.data?.message
-
-        toast.error(message || "Something went wrong")
         throw message
     }
 })
@@ -107,7 +99,6 @@ export const verifyOtp = createAsyncThunk("verifyOtp", async (data) => {
 export const resetPassword = createAsyncThunk("resetPassword", async (data) => {
     try {
         const response = await API.put("users/reset-password", data)
-        console.log(response.data)
         toast.success(response.data?.message)
         return response.data
     } catch (error) {
@@ -120,7 +111,6 @@ export const verification = createAsyncThunk("verification", async ({ userId, to
     try {
 
         const response = await API.get(`users/${userId}/verify/${token}`)
-        console.log(response.data)
         toast.success(response.data?.message)
         return response.data
     } catch (error) {
