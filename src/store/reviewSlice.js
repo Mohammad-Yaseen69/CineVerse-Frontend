@@ -7,7 +7,7 @@ const initialState = {
 }
 
 
-export const addReview = createAsyncThunk(async (data, { id }) => {
+export const addReview = createAsyncThunk("review/add",async (data, { id }) => {
     try {
         toast.loading("Adding Review", { id: "review" })
         const response = await API.post(`reviews/${id}`)
@@ -20,7 +20,7 @@ export const addReview = createAsyncThunk(async (data, { id }) => {
 })
 
 
-export const deleteReview = createAsyncThunk(async ({ id }) => {
+export const deleteReview = createAsyncThunk("review/delete",async ({ id }) => {
     try {
         toast.loading("Deleting Review", { id: "review" })
         const response = await API.delete(`reviews/${id}`)
@@ -32,7 +32,7 @@ export const deleteReview = createAsyncThunk(async ({ id }) => {
     }
 })
 
-export const editReview = createAsyncThunk(async ({ data, id }) => {
+export const editReview = createAsyncThunk("review/edit",async ({ data, id }) => {
     try {
         toast.loading("Editing Review", { id: "review" })
         const response = await API.patch(`reviews/${id}`, data)
@@ -44,7 +44,7 @@ export const editReview = createAsyncThunk(async ({ data, id }) => {
     }
 })
 
-export const listReviews = createAsyncThunk(async () => {
+export const listReviews = createAsyncThunk("review/list",async () => {
     try {
         toast.loading("Loading Reviews", { id: "review" })
         const response = await API.get(`reviews`)
@@ -56,7 +56,7 @@ export const listReviews = createAsyncThunk(async () => {
     }
 })
 
-export const likeReview = createAsyncThunk(async ({ id }) => {
+export const likeReview = createAsyncThunk("review/like",async ({ id }) => {
     try {
         const response = await API.patch(`reviews/${id}/like`)
         toast.success("Review Liked", { id: "review" })
@@ -67,7 +67,7 @@ export const likeReview = createAsyncThunk(async ({ id }) => {
     }
 })
 
-export const dislikeReview = createAsyncThunk(async ({ id }) => {
+export const dislikeReview = createAsyncThunk("review/dislike",async ({ id }) => {
     try {
         const response = await API.patch(`reviews/${id}/dislike`)
         toast.success("Review Disliked", { id: "review" })

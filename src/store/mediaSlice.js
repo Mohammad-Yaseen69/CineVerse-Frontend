@@ -7,78 +7,96 @@ const initialState = {
     loading: false,
 }
 
-export const addMedia = createAsyncThunk(async (data) => {
-    try {
-        toast.loading("Creating Media...", { id: "media" })
-        const response = await API.post("media", data)
-        toast.success(response.data?.message, { id: "media" })
-        return response.data
-    } catch (error) {
-        toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" })
-        throw error
-    }
-})
 
-
-export const deleteMedia = createAsyncThunk(async ({ id }) => {
-    try {
-        toast.loading("Deleting Media", { id: "media" })
-        const response = await API.delete(`media/${id}`)
-        toast.success(response.data?.message, { id: "media" })
-        return response.data
-    } catch (error) {
-        toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" })
-        throw error
+export const addMedia = createAsyncThunk(
+    "media/add",
+    async (data) => {
+        try {
+            toast.loading("Creating Media...", { id: "media" });
+            const response = await API.post("media", data);
+            toast.success(response.data?.message, { id: "media" });
+            return response.data;
+        } catch (error) {
+            toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" });
+            throw error;
+        }
     }
-})
+);
 
-export const getAllMedia = createAsyncThunk(async () => {
-    try {
-        toast.loading("Loading..", { id: "media" })
-        const response = await API.get(`media`)
-        toast.success(response.data?.message, { id: "media" })
-        return response.data
-    } catch (error) {
-        toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" })
-        throw error
+export const deleteMedia = createAsyncThunk(
+    "media/delete",
+    async ({ id }) => {
+        try {
+            toast.loading("Deleting Media", { id: "media" });
+            const response = await API.delete(`media/${id}`);
+            toast.success(response.data?.message, { id: "media" });
+            return response.data;
+        } catch (error) {
+            toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" });
+            throw error;
+        }
     }
-})
+);
 
-export const getMedia = createAsyncThunk(async ({ id }) => {
-    try {
-        toast.loading("Loading..", { id: "media" })
-        const response = await API.get(`media/${id}`)
-        toast.success(response.data?.message, { id: "media" })
-        return response.data
-    } catch (error) {
-        toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" })
-        throw error
+export const getAllMedia = createAsyncThunk(
+    "media/getAll",
+    async () => {
+        try {
+            toast.loading("Loading..", { id: "media" });
+            const response = await API.get(`media`);
+            toast.success(response.data?.message, { id: "media" });
+            return response.data;
+        } catch (error) {
+            toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" });
+            throw error;
+        }
     }
-})
+);
 
-export const editMedia = createAsyncThunk(async (data, { id }) => {
-    try {
-        toast.loading("Loading..", { id: "media" })
-        const response = await API.patch(`media/${id}`, data)
-        toast.success(response.data?.message, { id: "media" })
-        return response.data
-    } catch (error) {
-        toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" })
-        throw error
+export const getMedia = createAsyncThunk(
+    "media/get",
+    async ({ id }) => {
+        try {
+            toast.loading("Loading..", { id: "media" });
+            const response = await API.get(`media/${id}`);
+            toast.success(response.data?.message, { id: "media" });
+            return response.data;
+        } catch (error) {
+            toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" });
+            throw error;
+        }
     }
-})
+);
 
-export const searchMedia = createAsyncThunk(async (query) => {
-    try {
-        toast.loading("Loading..", { id: "media" })
-        const response = await API.patch(`media/search`, query)
-        toast.success(response.data?.message, { id: "media" })
-        return response.data
-    } catch (error) {
-        toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" })
-        throw error
+export const editMedia = createAsyncThunk(
+    "media/edit",
+    async ({ id, data }) => {
+        try {
+            toast.loading("Loading..", { id: "media" });
+            const response = await API.patch(`media/${id}`, data);
+            toast.success(response.data?.message, { id: "media" });
+            return response.data;
+        } catch (error) {
+            toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" });
+            throw error;
+        }
     }
-})
+);
+
+export const searchMedia = createAsyncThunk(
+    "media/search",
+    async (query) => {
+        try {
+            toast.loading("Loading..", { id: "media" });
+            const response = await API.patch(`media/search`, query);
+            toast.success(response.data?.message, { id: "media" });
+            return response.data;
+        } catch (error) {
+            toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" });
+            throw error;
+        }
+    }
+);
 
 
 

@@ -10,7 +10,7 @@ const initialState = {
 }
 
 
-export const addGenre = createAsyncThunk(async (data) => {
+export const addGenre = createAsyncThunk("genre/add",async (data) => {
     try {
         toast.loading("Adding Genre", { id: "genre" })
         const response = await API.post("genres", data)
@@ -22,7 +22,7 @@ export const addGenre = createAsyncThunk(async (data) => {
     }
 })
 
-export const deleteGenre = createAsyncThunk(async ({ id }) => {
+export const deleteGenre = createAsyncThunk("genre/delete",async ({ id }) => {
     try {
         toast.loading("Deleting Genre", { id: "genre" })
         const response = await API.delete(`genres/${id}`)
@@ -35,7 +35,7 @@ export const deleteGenre = createAsyncThunk(async ({ id }) => {
     }
 })
 
-export const getAllGenre = createAsyncThunk(async () => {
+export const getAllGenre = createAsyncThunk("genre/getAll",async () => {
     try {
         toast.loading("Loading Genres", { id: "genre" })
         const response = await API.get("genres")
@@ -76,7 +76,7 @@ const genreSlice = createSlice({
             state.loading = true
         })
         builder.addCase(getAllGenre.fulfilled, (state, action) => {
-            state.genres = action.payload?.data
+            state.genres = [...action.payload?.data]
             state.loading = false
         })
         builder.addCase(getAllGenre.rejected, (state, action) => {
