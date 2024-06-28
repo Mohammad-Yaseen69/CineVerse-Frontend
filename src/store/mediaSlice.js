@@ -42,9 +42,7 @@ export const getAllMedia = createAsyncThunk(
     "media/getAll",
     async () => {
         try {
-            toast.loading("Loading..", { id: "media" });
             const response = await API.get(`media`);
-            toast.success(response.data?.message, { id: "media" });
             return response.data;
         } catch (error) {
             toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" });
