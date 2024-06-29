@@ -6,7 +6,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import {
   Login,
   Register,
-  Chat, Home,
+  Home,
   NotFound,
   ForgotPassword,
   OTPVerify,
@@ -14,10 +14,10 @@ import {
   Verification,
   Admin,
   CreateGenres,
-  CreateMovie,
   Reviews,
-  UpdateMovies,
-  AdminRoutes
+  AdminRoutes,
+  CreateMedia,
+  UpdateMedia
 } from "./pages"
 import { Provider } from 'react-redux'
 import store from "./store/store.js"
@@ -29,19 +29,18 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/chat" element={<Chat />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/otp-verify" element={<OTPVerify />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/users/:userId/verify/:token" element={<Verification />} />
 
       {/* Admin Routes */}
-      <Route path="admin" element={<AdminRoutes />}>
+      <Route path="/admin" element={<AdminRoutes />}>
         <Route index element={<Admin />} />
         <Route path="genres/create" element={<CreateGenres />} />
         <Route path="reviews" element={<Reviews />} />
-        <Route path="movies/create" element={<CreateMovie />} />
-        <Route path="movies/:movieId/update" element={<UpdateMovies />} />
+        <Route path="media/create" element={<CreateMedia />} />
+        <Route path="medias/:mediaId/update" element={<UpdateMedia />} />
       </Route>
 
       {/* Catch-all route */}

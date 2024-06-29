@@ -5,11 +5,12 @@ import toast from 'react-hot-toast'
 
 const AdminRoutes = () => {
     const user = useSelector(state => state.user.user)
+    const loading = useSelector(state => state.user.loading)
     const navigate = useNavigate()
-    console.log(user?.isAdmin)
+
     useEffect(() => {
         if (user) {
-            if (!user?.isAdmin) {
+            if (!user?.isAdmin && !user) {
                 toast.error("You are not the admin");
                 navigate("/login");
             }

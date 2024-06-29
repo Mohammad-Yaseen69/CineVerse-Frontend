@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import Logo from "../assets/logo.png"
 import { logoutUser } from "../store/userslice"
 import { useNavigate } from "react-router-dom"
@@ -15,6 +15,7 @@ const Header = () => {
   const user = useSelector(state => state.user)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const location = useLocation();
 
   const handleLogout = () => {
     dispatch(logoutUser())
@@ -22,7 +23,10 @@ const Header = () => {
   }
 
   return (
-    <div className="w-full py-4 bg-black bg-opacity-25 backdrop-blur-sm px-3 xs:px-5">
+    <div
+      className={`w-full py-4 bg-black bg-opacity-25 backdrop-blur-sm px-3 xs:px-5 
+        ${location.pathname.includes("admin") && "hidden"}`}
+    >
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <Link to={"/"} className="flex items-center space-x-2">
