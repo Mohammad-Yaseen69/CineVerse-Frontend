@@ -172,11 +172,6 @@ body {
   z-index: -10;
 }
 
-@media screen and (max-width:480px) {
-  .backdrop-img {
-    height: 70vh;
-  }
-}
 
 .backdrop-img .lazy-load-image-background {
   width: 100%;
@@ -200,4 +195,13 @@ body {
   bottom: 0;
   left: 0;
   z-index: -1
+}
+@media screen and (max-width:480px) {
+  .backdrop-img {
+    height: 70vh;
+  }
+  .opacity-layer{
+    bottom: 100px;
+    height: 300px;
+  }
 }
