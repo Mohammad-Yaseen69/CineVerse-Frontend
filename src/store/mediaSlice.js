@@ -11,6 +11,7 @@ const initialState = {
 export const addMedia = createAsyncThunk(
     "media/add",
     async (data) => {
+        console.log(data)
         try {
             toast.loading("Creating Media...", { id: "media" });
             const response = await API.post("media", data);

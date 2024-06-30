@@ -4,7 +4,7 @@ const FormStructure = ({
     onSubmit
 }) => {
   return (
-    <div className='w-full h-[80vh] flex'>
+    <div className='w-full h-[110vh] flex'>
     <div className="w-full h-full flex flex-col justify-center items-center">
       <h1 className="font-monstserrat text-white font-extrabold  text-3xl md-5 xs:text-5xl xs:mb-10">{name}</h1>
       <form onSubmit={onSubmit} action="" className="flex w-full  flex-col md:w-[60%] gap-3 items-start mx-auto p-6">
