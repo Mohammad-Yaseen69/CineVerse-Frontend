@@ -53,11 +53,11 @@ const MediaFormField = ({
                     <select
                         {...register(name, { required })}
                         name={name}
-                        className={`${className} px-2 py-2 rounded-lg w-full bg-zinc-700 border-none outline-none text-white `}
+                        className={`${className}  px-2 py-2 rounded-lg w-full bg-zinc-700 border-none outline-none text-white`}
                         {...props}
                     >
                         {select.map((option, index) => (
-                            <option key={index} value={option.value}>{option.label}</option>
+                            <option disabled={option.value === ""} key={index} value={option.value}>{option.label}</option>
                         ))}
                     </select>
                 </div>
