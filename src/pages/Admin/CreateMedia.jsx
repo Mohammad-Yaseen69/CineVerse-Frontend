@@ -4,6 +4,8 @@ import { FormStages } from "../../components"
 import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { addMedia } from "../../store/mediaSlice"
+import { Link } from "react-router-dom";
+import { FaArrowLeft } from 'react-icons/fa'
 
 
 const CreateMedia = () => {
@@ -97,6 +99,7 @@ const CreateMedia = () => {
 
   return (
     <div className='w-full h-screen flex flex-col justify-start pt-12 items-center'>
+      <Link to="/admin" className="absolute left-2 top-6 xs:left-6 font-bold text-white font-roboto"><FaArrowLeft color="white" size={25}/> </Link>
       <h1 className='text-white text-4xl xs:text-5xl font-bold font-monstserrat'>Create Media</h1>
       <form onSubmit={handleSubmit(submit)} className="mt-10 flex items-center justify-center w-full" action="">
         <FormStages

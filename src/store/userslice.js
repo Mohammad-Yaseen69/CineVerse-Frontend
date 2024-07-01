@@ -61,6 +61,15 @@ export const getUser = createAsyncThunk("getUser", async () => {
     }
 })
 
+export const getAllUsers = createAsyncThunk("getAllUsers", async () => {
+    try {
+        const response = await API.get("users/all")
+        return response.data
+    } catch (error) {
+        throw message
+    }
+})
+
 export const refreshAccessToken = createAsyncThunk("refreshAccessToken", async () => {
     try {
         const response = await API.post("users/refresh-token")
@@ -229,6 +238,15 @@ const userSlice = createSlice({
             .addCase(verification.rejected, (state) => {
                 state.loading = false
                 state.isVerified = false
+            })
+            .addCase(getAllUsers.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(getAllUsers.fulfilled, (state, action) => {
+                state.loading = false
+            })
+            .addCase(getAllUsers.rejected, (state) => {
+                state.loading = false
             })
     }
 })

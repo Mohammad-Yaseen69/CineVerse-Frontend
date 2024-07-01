@@ -196,12 +196,24 @@ body {
   left: 0;
   z-index: -1
 }
+
+.main-admin {
+  width: calc(100% - 12rem);
+}
+
 @media screen and (max-width:480px) {
   .backdrop-img {
     height: 70vh;
   }
-  .opacity-layer{
+
+  .opacity-layer {
     bottom: 100px;
     height: 300px;
+  }
+}
+
+@media screen and (max-width : 1060px) {
+  .main-admin {
+    width: 100%;
   }
 }

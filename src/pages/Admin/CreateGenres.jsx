@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { addGenre, deleteGenre, getAllGenre } from "../../store/genreSlice"
 import { FiTrash2 } from 'react-icons/fi';
 import { useState } from "react";
+import { FaArrowLeft } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const CreateGenres = () => {
   const genres = useSelector(state => state.genres.genres)
@@ -24,6 +26,7 @@ const CreateGenres = () => {
 
   return (
     <div className="w-full h-full p-3 xs:p-8 ">
+       <Link to="/admin" className="absolute left-2 top-2 xs:top-6 xs:left-6 font-bold text-white font-roboto"><FaArrowLeft color="white" size={25}/> </Link>
       <div className="flex flex-col">
         <h1 className="text-3xl xs:text-5xl font-bold text-white my-7">Manage Genres</h1>
         <form className="flex flex-col items-start gap-4">
