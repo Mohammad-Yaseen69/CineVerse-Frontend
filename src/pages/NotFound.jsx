@@ -3,7 +3,7 @@ import error from '../assets/error.png'
 
 const NotFound = () => {
   return (
-    <div className="flex items-center flex-col gap-5 justify-center h-[80vh] bg-zinc-900">
+    <div className="flex items-center flex-col gap-5 justify-center h-screen bg-zinc-900">
       <img
         src={error}
         alt=""

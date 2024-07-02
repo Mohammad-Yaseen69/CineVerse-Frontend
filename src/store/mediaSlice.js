@@ -85,9 +85,12 @@ export const editMedia = createAsyncThunk(
 export const searchMedia = createAsyncThunk(
     "media/search",
     async (query) => {
+        
         try {
             toast.loading("Loading..", { id: "media" });
-            const response = await API.patch(`media/search`, query);
+            const response = await API.get(`media/search`, {
+                params: query
+            });
             toast.success(response.data?.message, { id: "media" });
             return response.data;
         } catch (error) {

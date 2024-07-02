@@ -4,7 +4,7 @@ import { FormStages } from "../../components"
 import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { addMedia } from "../../store/mediaSlice"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from 'react-icons/fa'
 
 
@@ -20,6 +20,7 @@ const CreateMedia = () => {
   const [selectedGenres, setSelectedGenres] = useState([])
   const [disable, setDisable] = useState(false)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const submit = async (data) => {
 
@@ -77,6 +78,7 @@ const CreateMedia = () => {
 
     const add = await dispatch(addMedia(formData));
 
+    navigate(`/media/${add.payload.data._id}`)
     setDisable(false)
 
     console.log("Response from dispatch:", add.payload);

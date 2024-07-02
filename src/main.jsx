@@ -17,7 +17,9 @@ import {
   Reviews,
   AdminRoutes,
   CreateMedia,
-  UpdateMedia
+  UpdateMedia,
+  ManageMedia,
+  Media
 } from "./pages"
 import { Provider } from 'react-redux'
 import store from "./store/store.js"
@@ -32,7 +34,8 @@ const router = createBrowserRouter(
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/otp-verify" element={<OTPVerify />} />
       <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/users/:userId/verify/:token" element={<Verification />} />
+      <Route path="/users/:userId/verify/:token" element={<Verification />} />\
+      <Route path="/media/:mediaId" element={<Media />} />
 
       {/* Admin Routes */}
       <Route path="/admin" element={<AdminRoutes />}>
@@ -40,7 +43,8 @@ const router = createBrowserRouter(
         <Route path="genres/create" element={<CreateGenres />} />
         <Route path="reviews" element={<Reviews />} />
         <Route path="media/create" element={<CreateMedia />} />
-        <Route path="medias/:mediaId/update" element={<UpdateMedia />} />
+        <Route path="media/:mediaId/update" element={<UpdateMedia />} />
+        <Route path='media/manage' element={<ManageMedia />} />
       </Route>
 
       {/* Catch-all route */}

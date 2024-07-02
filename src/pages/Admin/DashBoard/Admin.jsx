@@ -23,7 +23,8 @@ const Admin = () => {
       const medias = await dispatch(getAllMedia())
       const reviewsLength = medias.payload?.data?.map((media) => media.reviews).reduce((acc, curr) => acc + curr, 0)
 
-      console.log(users, medias)
+      
+
 
       setLengths({
         user: users.payload?.data?.length,
@@ -37,7 +38,7 @@ const Admin = () => {
     getData()
   }, [])
 
-  console.log(media)
+  
 
 
 
@@ -61,7 +62,7 @@ const Admin = () => {
               {media?.map((item, index) => (
                 <div key={index} className="flex items-center justify-between">
                   <div className="flex gap-2 items-center">
-                    <Img src={item.img.publicUrl} className="h-16 w-24 rounded" />
+                    <Img src={item.img.publicUrl} className="h-16 w-24 rounded object-cover" />
                     <div>
                       <h1 className="font-bold text-white ">{item.name}</h1>
                       <p className="font-semibold text-gray-200">{item.releaseYear}</p>
