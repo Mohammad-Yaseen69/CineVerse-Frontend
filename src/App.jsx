@@ -20,13 +20,19 @@ function App() {
 
   useEffect(() => {
     if (isLoggedIn && expiresIn) {
-      const expireTime = expiresIn * 1000 - 60000 // 1 minute before expiration
+      const interval = setInterval(() => {
+        const expireTime = expiresIn * 1000 - 60000; // 1 minute before expiration
 
-      if (expireTime < Date.now()) {
-        dispatch(refreshAccessToken())
-      }
+        console.log(expireTime, Date.now());
+
+        if (expireTime < Date.now()) {
+          dispatch(refreshAccessToken());
+        }
+      }, 60000); // Check every minute
+
+      return () => clearInterval(interval); // Cleanup the interval on unmount
     }
-  }, [isLoggedIn, expiresIn])
+  }, [])
 
   return (
     <div className="w-full relative min-h-screen ">

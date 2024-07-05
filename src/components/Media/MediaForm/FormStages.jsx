@@ -12,6 +12,7 @@ const FormStages = ({
   selectedGenres,
   setDate,
   date,
+  defaultDateValue,
   genres,
   fields,
   remove,
@@ -43,6 +44,7 @@ const FormStages = ({
             label="Release Year:"
             name="releaseYear"
             dateValue={date}
+            defaultValue={defaultDateValue}
             setDateValue={setDate}
           />
         </div>
@@ -56,7 +58,7 @@ const FormStages = ({
       </FormStage>
 
       <FormStage stage={stage} stageNumber={3}>
-        <GenreSelection genres={genres} handleGenreChange={handleGenreChange} />
+        <GenreSelection genres={genres} handleGenreChange={handleGenreChange} selectedGenre={selectedGenres} />
 
         <div className="flex flex-col w-full">
           <label htmlFor="" className="font-bold text-gray-300 bg-2 text-lg">Cast:</label>

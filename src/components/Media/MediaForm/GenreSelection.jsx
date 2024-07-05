@@ -4,6 +4,7 @@ import Select from 'react-select'
 const GenreSelection = ({
     genres,
     handleGenreChange,
+    selectedGenre,
 }) => {
     return (
         <div className={`flex flex-col`}>
@@ -23,6 +24,7 @@ const GenreSelection = ({
                 }}
                 classNamePrefix="select"
                 onChange={handleGenreChange}
+                defaultValue={selectedGenre}
             />
         </div>
     )

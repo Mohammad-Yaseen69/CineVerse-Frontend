@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -15,9 +15,16 @@ const MediaFormField = ({
     select,
     isDatePicker,
     dateValue,
+    defaultDateValue,
     setDateValue,
     ...props
 }) => {
+    useEffect(() => {
+        if (defaultDateValue) {
+            setDateValue(new Date(defaultDateValue, 0, 1)); // Set the date as Jan 1st of the default year
+        }
+    }, [defaultDateValue, setDateValue]);
+
     return (
         <>
             {isTextArea ? (
@@ -73,14 +80,14 @@ const MediaFormField = ({
                         dateFormat="yyyy"
                         showYearPicker
                         required
-                        maxDate={Date.now()}
+                        maxDate={new Date()}
                         yearItemNumber={10}
                         {...props}
                     />
                 </div>
             )}
         </>
-    )
+    );
 }
 
 export default MediaFormField;
