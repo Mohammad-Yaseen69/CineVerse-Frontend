@@ -5,6 +5,8 @@ import { logoutUser } from "../store/userslice"
 import { useNavigate } from "react-router-dom"
 import { Img } from "./"
 import { MdMovie } from 'react-icons/md';
+import { FaCompass, FaSignInAlt, FaUserPlus, } from 'react-icons/fa';
+import { useState } from "react"
 
 
 
@@ -16,6 +18,7 @@ const Header = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const location = useLocation();
+  const [toggle, setToggle] = useState(false)
 
   const handleLogout = () => {
     dispatch(logoutUser())
@@ -29,12 +32,15 @@ const Header = () => {
     >
       <div className="flex justify-between items-center">
         <div className="flex items-center">
-          <Link to={"/"} className="flex items-center space-x-2">
-            <MdMovie size={50} color="white" />
+          <Link to={"/"} className="flex items-center xs:space-x-2">
+            <MdMovie className="size-10 xs:size-14" color="white" />
             <p className="font-montserrat text-white font-semibold">CineVerse</p>
           </Link>
         </div>
 
+        <div>
+
+        </div>
         <div className="flex items-center">
           {user.loading ? (
             <div className="loader"></div>
@@ -43,6 +49,13 @@ const Header = () => {
               {user.isLoggedIn ? (
                 <div className="flex items-center gap-3">
                   {user.user?.isAdmin ? <img src={Admin} onClick={() => navigate("/admin")} className="size-11  cursor-pointer" alt="" /> : null}
+                  <button onClick={() => navigate("/explore")} className="Btn BtnGreen flex items-center space-x-2">
+                    <div className="sign">
+                      <FaCompass size={37} color="white" />
+                    </div>
+                    <div className="text">Explore</div>
+                  </button>
+                  
                   <button onClick={handleLogout} className="Btn flex items-center space-x-2">
                     <div className="sign">
                       <svg viewBox="0 0 512 512" className="h-6 w-6">
@@ -53,13 +66,27 @@ const Header = () => {
                   </button>
                 </div>
               ) : (
-                <div className="flex gap-2 xs:gap-3">
-                  <Link to="/login">
-                    <button className={btnClass}>Login</button>
-                  </Link>
-                  <Link to="register">
-                    <button className={btnClass}>Register</button>
-                  </Link>
+                <div className="flex gap-2 items-center xs:gap-3">
+                  <button onClick={() => navigate("/explore")} className="Btn BtnGreen flex items-center space-x-2">
+                    <div className="sign">
+                      <FaCompass size={37} color="white" />
+                    </div>
+                    <div className="text">Explore</div>
+                  </button>
+
+                  <button onClick={() => navigate("/login")} className="Btn BtnBlue flex items-center space-x-2">
+                    <div className="sign">
+                      <FaSignInAlt size={37} color="white" />
+                    </div>
+                    <div className="text">Login</div>
+                  </button>
+
+                  <button onClick={() => navigate("/register")} className="Btn BtnBlue flex items-center space-x-2">
+                    <div className="sign">
+                      <FaUserPlus size={37} color="white" />
+                    </div>
+                    <div className="text">Register</div>
+                  </button>
                 </div>
               )}
             </>

@@ -62,9 +62,18 @@ body {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  flex-shrink: 0;
   transition-duration: .3s;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
   background-color: rgb(255, 65, 65);
+}
+
+.BtnGreen {
+  background-color: rgb(0, 158, 13);
+}
+
+.BtnBlue{
+  background-color: rgb(0, 132, 255);
 }
 
 /* plus sign */
@@ -201,6 +210,8 @@ body {
   width: calc(100% - 12rem);
 }
 
+
+
 @media screen and (max-width:480px) {
   .backdrop-img {
     height: 70vh;
@@ -209,6 +220,24 @@ body {
   .opacity-layer {
     bottom: 100px;
     height: 300px;
+  }
+  .Btn:hover {
+    width: 45px;
+  }
+
+  .Btn:hover .sign {
+    width: 100%;
+  }
+
+  /* text */
+  .text {
+    display: none;
+  }
+
+  .Btn:hover .sign {
+    width: 100%;
+    transition-duration: .3s;
+    padding-left: 0px;
   }
 }
 
