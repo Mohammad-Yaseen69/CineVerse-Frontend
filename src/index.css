@@ -72,7 +72,7 @@ body {
   background-color: rgb(0, 158, 13);
 }
 
-.BtnBlue{
+.BtnBlue {
   background-color: rgb(0, 132, 255);
 }
 
@@ -172,7 +172,7 @@ body {
 
 .backdrop-img {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -210,6 +210,105 @@ body {
   width: calc(100% - 12rem);
 }
 
+.CircularProgressbar-text {
+  font-size: 34px;
+  font-weight: 700;
+  color: black;
+}
+
+.posterBlock {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.5;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.posterBlock .lazy-load-image-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.posterBlock .lazy-load-image-background img {
+  width: 100%;
+  border-radius: 12px;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  flex-shrink: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+      90deg,
+      #18181B 0%,     /* zinc-700 */
+      #27272b 20%,   /* zinc-600 */
+      #1e1e20 60%,   /* zinc-500 */
+      #1d1d1f 100%  
+  );
+  animation: shimmer 2s infinite;
+}
+
+.grid {
+  display: grid;
+  gap: 25px; /* Adjust gap between items */
+ 
+  scrollbar-width: thin; /* Required for Firefox */
+  scrollbar-color: #4a4a4a #121212; /* Scrollbar track and thumb colors */
+}
+
+.grid::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.grid::-webkit-scrollbar-track {
+  background: #121212; /* Track color */
+}
+
+.grid::-webkit-scrollbar-thumb {
+  background-color: #4a4a4a; /* Thumb color */
+  border-radius: 10px; /* Rounded corners */
+  border: 2px solid #121212; /* Border around the thumb */
+}
+
+@media (max-width: 768px) {
+  .grid::-webkit-scrollbar {
+    display: none;
+  }
+  .grid{
+    scrollbar-width: none;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+      transform: translateX(100%);
+  }
+}
 
 
 @media screen and (max-width:480px) {
@@ -218,9 +317,10 @@ body {
   }
 
   .opacity-layer {
-    bottom: 100px;
+    bottom: 0px;
     height: 300px;
   }
+
   .Btn:hover {
     width: 45px;
   }
