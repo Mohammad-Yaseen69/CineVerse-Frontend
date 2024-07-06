@@ -27,7 +27,7 @@ const Header = () => {
 
   return (
     <div
-      className={`w-full absolute top-0 left-0 py-2 bg-black bg-opacity-25 backdrop-blur-sm px-3 xs:px-5 
+      className={`w-full absolute z-50 top-0 left-0 py-2 bg-black bg-opacity-25 backdrop-blur-sm px-3 xs:px-5 
         ${location.pathname.includes("admin") && "hidden"}`}
     >
       <div className="flex justify-between items-center">
