@@ -223,7 +223,6 @@ body {
   background-size: cover;
   background-position: center;
   cursor: pointer;
-  margin-bottom: 30px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -263,50 +262,91 @@ body {
   left: 0;
   flex-shrink: 0;
   transform: translateX(-100%);
-  background-image: linear-gradient(
-      90deg,
-      #18181B 0%,     /* zinc-700 */
-      #27272b 20%,   /* zinc-600 */
-      #1e1e20 60%,   /* zinc-500 */
-      #1d1d1f 100%  
-  );
+  background-image: linear-gradient(90deg,
+      #18181B 0%,
+      #27272b 20%,
+      #1e1e20 60%,
+      #1d1d1f 100%);
   animation: shimmer 2s infinite;
 }
 
 .grid {
   display: grid;
-  gap: 25px; /* Adjust gap between items */
- 
-  scrollbar-width: thin; /* Required for Firefox */
-  scrollbar-color: #4a4a4a #121212; /* Scrollbar track and thumb colors */
+  gap: 25px;
+  scrollbar-width: none;
 }
 
 .grid::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
+  display: none;
 }
 
-.grid::-webkit-scrollbar-track {
-  background: #121212; /* Track color */
+.grid {
+  scrollbar-width: none;
 }
 
-.grid::-webkit-scrollbar-thumb {
-  background-color: #4a4a4a; /* Thumb color */
-  border-radius: 10px; /* Rounded corners */
-  border: 2px solid #121212; /* Border around the thumb */
+.loader2 {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid #514b82;
+  animation:
+    l20-1 0.8s infinite linear alternate,
+    l20-2 1.6s infinite linear;
 }
 
-@media (max-width: 768px) {
-  .grid::-webkit-scrollbar {
-    display: none;
+@keyframes l20-1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%)
   }
-  .grid{
-    scrollbar-width: none;
+
+  12.5% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 0%, 100% 0%, 100% 0%)
+  }
+
+  25% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 100% 100%, 100% 100%)
+  }
+
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%)
+  }
+
+  62.5% {
+    clip-path: polygon(50% 50%, 100% 0, 100% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%)
+  }
+
+  75% {
+    clip-path: polygon(50% 50%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 50% 100%, 0% 100%)
+  }
+
+  100% {
+    clip-path: polygon(50% 50%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 0% 100%)
   }
 }
+
+@keyframes l20-2 {
+  0% {
+    transform: scaleY(1) rotate(0deg)
+  }
+
+  49.99% {
+    transform: scaleY(1) rotate(135deg)
+  }
+
+  50% {
+    transform: scaleY(-1) rotate(0deg)
+  }
+
+  100% {
+    transform: scaleY(-1) rotate(-135deg)
+  }
+}
+
+@media (max-width: 768px) {}
 
 @keyframes shimmer {
   100% {
-      transform: translateX(100%);
+    transform: translateX(100%);
   }
 }
 
