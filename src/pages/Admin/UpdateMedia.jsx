@@ -96,7 +96,7 @@ const UpdateMovies = () => {
   };
 
   const handleGenreChange = (selected) => {
-    setSelectedGenres(selected.map((item) => item.value));
+    setSelectedGenres(selected.map((item) => item.value.trim()));
   };
 
   return (
