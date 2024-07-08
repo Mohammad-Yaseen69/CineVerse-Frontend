@@ -20,7 +20,8 @@ import {
   UpdateMedia,
   ManageMedia,
   Media,
-  Search
+  Search,
+  Explore
 } from "./pages"
 import { Provider } from 'react-redux'
 import store from "./store/store.js"
@@ -38,6 +39,7 @@ const router = createBrowserRouter(
       <Route path="/users/:userId/verify/:token" element={<Verification />} />\
       <Route path="/media/:mediaId" element={<Media />} />
       <Route path='/search/:query' element={<Search />} />
+      <Route path='/explore' element={<Explore />} />
 
       {/* Admin Routes */}
       <Route path="/admin" element={<AdminRoutes />}>
