@@ -44,7 +44,7 @@ const FormStages = ({
             label="Release Year:"
             name="releaseYear"
             dateValue={date}
-            defaultValue={defaultDateValue}
+            defaultDateValue={defaultDateValue ? defaultDateValue : undefined}
             setDateValue={setDate}
           />
         </div>

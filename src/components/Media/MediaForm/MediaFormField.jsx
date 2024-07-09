@@ -19,9 +19,12 @@ const MediaFormField = ({
     setDateValue,
     ...props
 }) => {
+
     useEffect(() => {
         if (defaultDateValue) {
-            setDateValue(new Date(defaultDateValue, 0, 1)); // Set the date as Jan 1st of the default year
+            const year = Number(defaultDateValue);
+            const defaultDate = new Date(year, 0);
+            setDateValue(defaultDate);
         }
     }, [defaultDateValue, setDateValue]);
 
@@ -75,6 +78,7 @@ const MediaFormField = ({
                     <label className='text-gray-300 pb-2 font-bold text-lg' htmlFor={name}>{label}</label>
                     <DatePicker
                         selected={dateValue}
+                        // value={dateValue}
                         onChange={(date) => setDateValue(date)}
                         className={`${className} px-2 py-2 rounded-lg w-full bg-zinc-700 border-none outline-none text-white`}
                         dateFormat="yyyy"

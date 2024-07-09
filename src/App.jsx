@@ -23,8 +23,6 @@ function App() {
       const interval = setInterval(() => {
         const expireTime = expiresIn * 1000 - 60000; // 1 minute before expiration
 
-        console.log(expireTime, Date.now());
-
         if (expireTime < Date.now()) {
           dispatch(refreshAccessToken());
         }
