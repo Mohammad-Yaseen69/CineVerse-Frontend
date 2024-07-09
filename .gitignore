@@ -23,6 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-.eslintrc.cjs
 .env
-postcss.config.js
