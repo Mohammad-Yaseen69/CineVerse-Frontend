@@ -28,6 +28,16 @@ const SideBar = () => {
             </li>
             <li>
               <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `block py-2 px-4 text-lg rounded-r-full font-bold font-monstserrat ${isActive ? "bg-gradient-to-b from-green-500 to-lime-400" : "bg-transparent hover:bg-gradient-to-b hover:from-green-500 hover:to-lime-400"}`
+                }
+              >
+               Go back to Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to="/admin/genres/create"
                 className={({ isActive }) =>
                   `block py-2 px-4 text-lg rounded-r-full font-bold font-monstserrat ${isActive ? "bg-gradient-to-b from-green-500 to-lime-400" : "bg-transparent hover:bg-gradient-to-b hover:from-green-500 hover:to-lime-400"}`
