@@ -152,7 +152,7 @@ const Explore = () => {
 
             {!loading && data?.length > 0 &&
                 <>
-                    <div className="pt-11 flex max-xs:justify-center flex-wrap gap-x-3 xs:gap-x-8">
+                    <div className="pt-11 flex max-sm:justify-center flex-wrap gap-x-3 xs:gap-x-8">
                         {
                             data?.map((media, index) => (
                                 <MediaCard
@@ -168,7 +168,7 @@ const Explore = () => {
                             ))
                         }
                     </div>
-                    <div className=" pb-3 gap-1  flex justify-center flex-nowrap">
+                   {totalPages.length > 1 && <div className=" pb-3 gap-1  flex justify-center flex-nowrap">
                         {page > 1 && (
                             <div className="w-10 h-10 rounded-full flex justify-center items-center cursor-pointer bg-zinc-700 hover:bg-zinc-800 text-white" onClick={() => setPage(page - 1)}>
                                 {"<"}
@@ -186,7 +186,7 @@ const Explore = () => {
                                 {">"}
                             </div>
                         )}
-                    </div>
+                    </div>}
                 </>
             }
             {!loading && data?.length === 0 && <h1 className="text-gray-400 pt-6 font-monstserrat font-extrabold text-lg">No results found</h1>}

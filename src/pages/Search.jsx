@@ -16,7 +16,7 @@ const Search = () => {
         dispatch(searchMedia({
             query,
             page,
-            limit: 10
+            limit: 20
         })).then((res) => {
             setData([...res.payload?.data?.docs])
             setTotalPages(Array.from({ length: res.payload?.data?.totalPages }, (_, index) => index + 1))
@@ -34,7 +34,7 @@ const Search = () => {
 
             {!loading && data?.length > 0 &&
                 <>
-                    <div className="pt-11 flex max-xs:justify-center flex-wrap xs:gap-x-8">
+                    <div className="pt-11 flex max-sm:justify-center flex-wrap gap-x-4 xs:gap-x-8">
                         {
                             data?.map((media, index) => (
                                 <MediaCard
@@ -49,7 +49,7 @@ const Search = () => {
                             ))
                         }
                     </div>
-                    <div className=" pb-3 gap-1  flex justify-center flex-nowrap">
+                   {totalPages.length > 1 && <div className=" pb-3 gap-1  flex justify-center flex-nowrap">
                         {/* Previous page button */}
                         {page > 1 && (
                             <div className="w-10 h-10 rounded-full flex justify-center items-center cursor-pointer bg-zinc-700 hover:bg-zinc-800 text-white" onClick={() => setPage(page - 1)}>
@@ -70,7 +70,7 @@ const Search = () => {
                                 {">"}
                             </div>
                         )}
-                    </div>
+                    </div>}
                 </>
             }
 

@@ -7,10 +7,10 @@ const initialState = {
 }
 
 
-export const addReview = createAsyncThunk("review/add",async (data, { id }) => {
+export const addReview = createAsyncThunk("review/add", async ({review , mediaId}) => {
     try {
         toast.loading("Adding Review", { id: "review" })
-        const response = await API.post(`reviews/${id}`)
+        const response = await API.post(`reviews/${mediaId}`, {review})
         toast.success("Review Added", { id: "review" })
         return response.data
     } catch (error) {
@@ -20,10 +20,10 @@ export const addReview = createAsyncThunk("review/add",async (data, { id }) => {
 })
 
 
-export const deleteReview = createAsyncThunk("review/delete",async ({ id }) => {
+export const deleteReview = createAsyncThunk("review/delete", async ({ reviewId }) => {
     try {
         toast.loading("Deleting Review", { id: "review" })
-        const response = await API.delete(`reviews/${id}`)
+        const response = await API.delete(`reviews/${reviewId}`)
         toast.success("Review Deleted", { id: "review" })
         return response.data
     } catch (error) {
@@ -32,7 +32,7 @@ export const deleteReview = createAsyncThunk("review/delete",async ({ id }) => {
     }
 })
 
-export const editReview = createAsyncThunk("review/edit",async ({ data, id }) => {
+export const editReview = createAsyncThunk("review/edit", async ({ data, id }) => {
     try {
         toast.loading("Editing Review", { id: "review" })
         const response = await API.patch(`reviews/${id}`, data)
@@ -44,7 +44,7 @@ export const editReview = createAsyncThunk("review/edit",async ({ data, id }) =>
     }
 })
 
-export const listReviews = createAsyncThunk("review/list",async () => {
+export const listReviews = createAsyncThunk("review/list", async () => {
     try {
         toast.loading("Loading Reviews", { id: "review" })
         const response = await API.get(`reviews`)
@@ -56,10 +56,10 @@ export const listReviews = createAsyncThunk("review/list",async () => {
     }
 })
 
-export const likeReview = createAsyncThunk("review/like",async ({ id }) => {
+export const likeReview = createAsyncThunk("review/like", async ({ id }) => {
     try {
         const response = await API.patch(`reviews/${id}/like`)
-        toast.success("Review Liked", { id: "review" })
+        toast.success(response.data.message, { id: "review" })
         return response.data
     } catch (error) {
         toast.error(error.response?.data?.message, { id: "review" })
@@ -67,10 +67,10 @@ export const likeReview = createAsyncThunk("review/like",async ({ id }) => {
     }
 })
 
-export const dislikeReview = createAsyncThunk("review/dislike",async ({ id }) => {
+export const dislikeReview = createAsyncThunk("review/dislike", async ({ id }) => {
     try {
         const response = await API.patch(`reviews/${id}/dislike`)
-        toast.success("Review Disliked", { id: "review" })
+        toast.success(response.data.message, { id: "review" })
         return response.data
     } catch (error) {
         toast.error(error.response?.data?.message, { id: "review" })
@@ -130,7 +130,7 @@ const reviewSlice = createSlice({
         builder.addCase(dislikeReview.pending, (state) => {
             state.loading = true;
         })
-        builder.addCase(dislikeReview.fulfilled,(state) => {
+        builder.addCase(dislikeReview.fulfilled, (state) => {
             state.loading = false;
         })
         builder.addCase(dislikeReview.rejected, (state) => {

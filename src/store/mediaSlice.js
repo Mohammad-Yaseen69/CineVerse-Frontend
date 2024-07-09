@@ -56,9 +56,7 @@ export const getMedia = createAsyncThunk(
     "media/get",
     async ({ id }) => {
         try {
-            toast.loading("Loading..", { id: "media" });
             const response = await API.get(`media/${id}`);
-            toast.success(response.data?.message, { id: "media" });
             return response.data;
         } catch (error) {
             toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" });
@@ -85,13 +83,11 @@ export const editMedia = createAsyncThunk(
 export const searchMedia = createAsyncThunk(
     "media/search",
     async (query) => {
-        
+
         try {
-            toast.loading("Loading..", { id: "media" });
             const response = await API.get(`media/search`, {
                 params: query
             });
-            toast.success(response.data?.message, { id: "media" });
             return response.data;
         } catch (error) {
             toast.error(error.response.data?.message || "Something went wrong please try again", { id: "media" });
