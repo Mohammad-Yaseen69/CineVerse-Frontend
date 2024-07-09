@@ -23,7 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-vite.config.js
 .eslintrc.cjs
 .env
 postcss.config.js
